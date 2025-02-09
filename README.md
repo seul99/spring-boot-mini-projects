@@ -9,7 +9,6 @@ SpringBoot를 사용하여 간단한 게시판을 만들어 보며 SpringBoot �
 <img src="https://img.shields.io/badge/MariaDB-003545?style=flat-square&logo=MariaDB&logoColor=white">
 <img src="https://img.shields.io/badge/Thymeleaf-005F0F?style=flat-square&logo=ThymeleafB&logoColor=white">
 <br>
-JPA
 
 
 ## ✏️ 주요 문법 정리
