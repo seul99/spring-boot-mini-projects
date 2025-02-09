@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 리스트 페이지</title>
+    <style>
+        * {
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+        }
+
+        .layout {
+            width: 600px;
+            margin: 0 auto;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 5px 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        th:nth-child(1), td:nth-child(1){
+            width: 20%;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        a:hover {
+            color: #007bff;
+        }
+
+        .pagination a, .pagination strong {
+            display: inline-block;
+            padding: 8px 12px;
+            margin: 2px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .pagination a {
+            background-color: #f4f4f4;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+
+        .pagination a:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .pagination strong {
+            background-color: red;
+            color: white;
+        }
+
+        .search-box {
+            margin-bottom: 40px;
+        }
+
+        .search-box input {
+            width: 70%;
+            padding: 8px;
+            margin-right: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .search-box button {
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .search-box button:hover {
+            background-color: #0056b3;
+        }
+
+        .write-button {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .write-button:hover {
+            background-color: #218838;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+<div class="layout">
+    <form class="search-box" th:action="@{/board/list}" method="get">
+        <input type="text" name="searchKeyword" placeholder="검색어 입력">
+        <button type="submit">검색</button>
+    </form>
+
+    <table>
+        <thead>
+        <tr>
+            <th>글번호</th>
+            <th>제목</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="board : ${list}">
+            <td th:text="${board.id}">1</td>
+            <td>
+                <a th:text="${board.title}" th:href="@{/board/view(id=${board.id})}"></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="pagination">
+        <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
+            <a th:if="${page != nowPage}"
+               th:href="@{/board/list(page=${page - 1}, searchKeyword=${param.searchKeyword})}"
+               th:text="${page}">
+            </a>
+            <strong th:if="${page == nowPage}" th:text="${page}"></strong>
+        </th:block>
+    </div>
+
+    <a href="/board/write" class="write-button">글 작성</a>
+</div>
+</body>
+</html>
+
+</body>
+</html>

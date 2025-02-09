@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시물 작성폼</title>
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f7fc;
+        color: #333;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .container h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #4A90E2;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group input, .form-group textarea, .form-group button {
+        width: 100%;
+        padding: 10px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        font-size: 16px;
+        margin-top: 10px;
+    }
+
+    .form-group input[type="file"] {
+        padding: 3px;
+        cursor: pointer;
+    }
+
+    .form-group button {
+        background-color: #4A90E2;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    .form-group button:hover {
+        background-color: #357ABD;
+    }
+
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .form-group textarea {
+        resize: vertical;
+        min-height: 200px;
+    }
+
+    .form-group input[type="text"] {
+        height: 40px;
+    }
+</style>
+<body>
+<div class="container">
+    <h1>게시물 수정</h1>
+    <form th:action="@{/board/update/{id}(id = ${board.id})}" method="post">
+        <div class="form-group">
+            <input name="title" type="text" th:value="${board.title}">
+            <textarea name="content" th:text="${board.content}"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="file">파일 첨부</label>
+            <input type="file" name="file" id="file">
+        </div>
+
+        <div class="form-group">
+            <button type="submit">수정</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
